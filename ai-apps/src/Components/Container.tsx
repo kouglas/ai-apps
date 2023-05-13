@@ -1,5 +1,5 @@
-'use client';
 //@ts-nocheck
+'use client';
 import {FiSend} from 'react-icons/fi'
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
