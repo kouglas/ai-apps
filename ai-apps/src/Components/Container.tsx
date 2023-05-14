@@ -3,15 +3,26 @@
 import {FiSend} from 'react-icons/fi'
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import getData from '@/Utils/Fetch';
 
 
 const Container = () => {
 
   const [isLoading, setIsLoading] = useState(false)
+  const [fetchedData, setFetchedData] = useState(null)
 
-  const handleClick = () => {
-    setIsLoading(true)
-    console.log('hey')
+  const handleClick = async () => {
+    setIsLoading(true) 
+    try {
+      const response = await getData()
+      setFetchedData(response)
+    }
+    catch(error) {
+      console.log(error)
+      setFetchedData(null)
+    }
+    setIsLoading(false)
+  
   }
 
   const handleSubmit = (e) => {
@@ -24,9 +35,17 @@ const Container = () => {
     const formJSON = Object.fromEntries(formData.entries())
     console.log(formJSON)
   }
+  console.log(getData())
 
   return ( 
     <section className="border-2 border-red-700">
+      {fetchedData ? (
+          <div id='output'>
+          <div id='image-container' ></div>
+          <p>{fetchedData.choices[0].text}</p>
+
+          </div> 
+          ) : (
       <div id="speech-bubble-ai"> 
       {isLoading ? null : (
           <p id="movie-boss-text">
@@ -53,12 +72,7 @@ const Container = () => {
       </div>
       </div>
       
-      <div>
-        <div id='image-container' ></div>
-        <h1 id='output-title'>Put title here</h1>
-        <h2 id='output-stars'>put cast here</h2>
-        <p id='output-text'>put text here</p>
-      </div>
+          )}
       
     </section>
     
