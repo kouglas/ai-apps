@@ -1,6 +1,6 @@
 import Container from '@/Components/Container'
-import Test from '@/app/test'
-import Image from 'next/image'
+// import Test from '@/app/test'
+// import Image from 'next/image'
 import Link from 'next/link'
 import { BiCameraMovie } from 'react-icons/bi'
 
